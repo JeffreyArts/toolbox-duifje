@@ -6,7 +6,24 @@ interface Position {
     z: number;
 }
 
-export class FocusPunt {
+// Type definitie voor de constructor opties
+export interface FocusPuntOptions {
+    pos?: Position;
+    watervoorraad?: number;
+}
+
+// Type definitie voor een FocusPunt object
+export interface IFocusPunt {
+    pos: Position;
+    watervoorraad: number;
+    inFocus: boolean;
+    isFocussing: number;
+    stopFocussing(): void;
+    vulWater(hoeveelheid: number): void;
+    gebruikWater(hoeveelheid: number): boolean;
+}
+
+export class FocusPunt implements IFocusPunt {
     private _pos: Position;
     private _watervoorraad: number;
     private _inFocus: boolean;

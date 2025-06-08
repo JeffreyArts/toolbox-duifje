@@ -13,9 +13,7 @@
                          class="focus-punt-wrapper"
                          :style="getPuntStyle(index)">
                         <div class="focus-punt-label">{{ getPuntLabel(index) }}</div>
-                        <FocusPuntComponent 
-                            :focus-punt="punt"
-                        />
+                        <FocusPuntComponent :focus-punt="punt" />
                     </div>
                 </div>
             </div>

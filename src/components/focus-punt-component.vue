@@ -10,14 +10,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { FocusPunt } from '../objects/focus-punt'
+import { defineComponent, PropType } from 'vue'
+import { IFocusPunt } from '../objects/focus-punt'
 
 export default defineComponent({
     name: 'FocusPuntComponent',
     props: {
         focusPunt: {
-            type: Object as () => FocusPunt,
+            type: Object as PropType<IFocusPunt>,
             required: true
         }
     },
