@@ -52,7 +52,7 @@
 import { defineComponent } from "vue"
 import _ from "lodash"
 import { FocusPunt } from "../objects/focus-punt"
-import FocusPuntComponent from "../components/FocusPuntComponent.vue"
+import FocusPuntComponent from "../components/focus-punt-component.vue"
 
 interface Options {
     test: string
@@ -64,7 +64,7 @@ export default defineComponent({
     },
     props: [],
     data() {
-        const focusPunt = new FocusPunt({ x: 0, y: 0, z: 0 })
+        const focusPunt = new FocusPunt({pos:{ x: 0, y: 0, z: 0 }, watervoorraad: Math.floor(Math.random() * 50) + 75})
         return {
             options: {
                 test: "",

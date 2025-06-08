@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router"
 import FocusPunt from "./focus-punt.vue"
+import FocusPunten from "./focus-punten.vue"
 import Home from "./home.vue"
 import OptionsOverview from "./options-overview.vue"
 
@@ -13,6 +14,11 @@ const routes = [
         path: "/focus-punt",
         name: "Focus punt",
         component: FocusPunt
+    },
+    {
+        path: "/focus-punten",
+        name: "Focus punten",
+        component: FocusPunten
     },
     {
         path: "/options-overview",

@@ -14,11 +14,16 @@ export class FocusPunt {
     private _focussingTween?: gsap.core.Tween;
     private _waterTween?: gsap.core.Tween;
 
-    constructor(pos: Position) {
-        this._pos = pos;
-        this._watervoorraad = 100;
+    constructor(options: {pos?: Position, watervoorraad?: number}) {
+        this._pos = options.pos || { x: 0, y: 0, z: 0 };
+        this._watervoorraad = options.watervoorraad || 100;
         this._inFocus = false;
         this._isFocussing = 0;
+
+        // Zorg dat de watervoorraad niet boven 100 komt
+        if (this._watervoorraad > 100) {
+            this._watervoorraad = 100;
+        }
     }
 
     // Getters
@@ -50,29 +55,7 @@ export class FocusPunt {
             this._inFocus = true;
         }
     }
-
-    /**
-     * Start het focussing proces
-     * Dit zal de isFocussing waarde langzaam laten oplopen naar 100
-     */
-    public startFocussing(): void {
-        // Stop eventuele bestaande animatie
-        this.stopFocussing();
-
-        // Start nieuwe animatie naar 100
-        this._focussingTween = gsap.to(this, {
-            _isFocussing: 100,
-            duration: 2, // 2 seconden om op te laden
-            ease: "power1.inOut",
-            onUpdate: () => {
-                this.isFocussing = this._isFocussing;
-            },
-            onComplete: () => {
-                this._inFocus = true;
-            }
-        });
-    }
-
+    
     /**
      * Stop het focussing proces
      * Dit zal de isFocussing waarde snel terug laten lopen naar 0

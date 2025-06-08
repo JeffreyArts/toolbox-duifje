@@ -17,23 +17,14 @@ export default defineComponent({
     name: 'FocusPuntComponent',
     props: {
         focusPunt: {
-            type: Object as () => {
-                pos: { x: number; y: number; z: number };
-                watervoorraad: number;
-                inFocus: boolean;
-                isFocussing: number;
-                startFocussing: () => void;
-                stopFocussing: () => void;
-                vulWater: (hoeveelheid: number) => void;
-                gebruikWater: (hoeveelheid: number) => boolean;
-            },
+            type: Object as () => FocusPunt,
             required: true
         }
     },
     data() {
         return {
             animationFrameId: null as number | null,
-            mousePosition: { x: 0, y: 0 },
+            mousePosition: { x: 200, y: 200 },
             focusContainer: null as HTMLDivElement | null,
         }
     },
@@ -76,7 +67,6 @@ export default defineComponent({
                         multiplier = 10
                     }
 
-                    console.log(this.focusPunt);
                     this.focusPunt.isFocussing += multiplier * (1 - distance/100)
                 } else {
                     this.focusPunt.stopFocussing()
@@ -92,6 +82,7 @@ export default defineComponent({
                 cancelAnimationFrame(this.animationFrameId)
                 this.animationFrameId = null
             }
+            this.focusPunt.stopFocussing()
         }
     }
 })
