@@ -1,12 +1,18 @@
+import { createWebHistory, createRouter } from "vue-router"
+import FocusPunt from "./focus-punt.vue"
 import Home from "./home.vue"
 import OptionsOverview from "./options-overview.vue"
-import { createWebHistory, createRouter } from "vue-router"
 
 const routes = [
     {
         path: "/",
         name: "Home",
         component: Home
+    },
+    {
+        path: "/focus-punt",
+        name: "Focus punt",
+        component: FocusPunt
     },
     {
         path: "/options-overview",

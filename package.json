@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "gsap": "^3.12.5",
+    "gsap": "^3.13.0",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "vue": "^3.4.33",
