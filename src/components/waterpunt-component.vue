@@ -1,6 +1,6 @@
 <template>
     <div class="focus-container" :ref="el => focusContainer = el as HTMLDivElement" :style="{ scale }">
-        <div class="water-container" :style="{ height: `${focusPunt.watervoorraad}%`, opacity: scale-1 }">
+        <div class="water-container" :style="{ height: `${waterpunt.watervoorraad}%`, opacity: scale-1 }">
             <div class="water-circle"></div>
         </div>
         <div class="focus-circle">
@@ -11,13 +11,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { IFocusPunt } from '../objects/focus-punt'
+import { IWaterpunt } from '../objects/waterpunt'
 
 export default defineComponent({
-    name: 'FocusPuntComponent',
+    name: 'WaterpuntComponent',
     props: {
-        focusPunt: {
-            type: Object as PropType<IFocusPunt>,
+        waterpunt: {
+            type: Object as PropType<IWaterpunt>,
             required: true
         }
     },
@@ -30,7 +30,7 @@ export default defineComponent({
     },
     computed: {
         scale() {
-            return 1 + 2 * this.focusPunt.isFocussing/100
+            return 1 + 2 * this.waterpunt.isFocussing/100
         }
     },
     mounted() {
@@ -67,9 +67,9 @@ export default defineComponent({
                         multiplier = 10
                     }
 
-                    this.focusPunt.isFocussing += multiplier * (1 - distance/100)
+                    this.waterpunt.isFocussing += multiplier * (1 - distance/100)
                 } else {
-                    this.focusPunt.stopFocussing()
+                    this.waterpunt.stopFocussing()
                 }
                 
                 this.animationFrameId = requestAnimationFrame(checkMouseInRadius)
@@ -82,7 +82,7 @@ export default defineComponent({
                 cancelAnimationFrame(this.animationFrameId)
                 this.animationFrameId = null
             }
-            this.focusPunt.stopFocussing()
+            this.waterpunt.stopFocussing()
         }
     }
 })

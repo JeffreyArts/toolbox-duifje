@@ -8,12 +8,12 @@
         <section class="viewport">
             <div class="viewport-content" ratio="1x1">
                 <div class="focus-punten-container">
-                    <div v-for="(punt, index) in focusPunten" 
+                    <div v-for="(punt, index) in waterpunten" 
                          :key="index"
                          class="focus-punt-wrapper"
                          :style="getPuntStyle(index)">
                         <div class="focus-punt-label">{{ getPuntLabel(index) }}</div>
-                        <FocusPuntComponent :focus-punt="punt" />
+                        <WaterpuntComponent :waterpunt="punt" />
                     </div>
                 </div>
             </div>
@@ -21,11 +21,11 @@
 
         <aside class="sidebar">
             <div class="options">
-                <div class="option-group" name="Focus punten overzicht">
-                    <div v-for="(punt, index) in focusPunten" 
+                <div class="option-group" name="Waterpunten overzicht">
+                    <div v-for="(punt, index) in waterpunten" 
                          :key="index"
                          class="focus-punt-option"
-                         @click="actiefFocusPuntIndex = index">
+                         @click="actiefWaterpuntIndex = index">
                         <div class="focus-punt-header">
                             <span class="focus-punt-label">{{ getPuntLabel(index) }}</span>
                             <span class="focus-status" :class="{ 'in-focus': punt.inFocus }">
@@ -48,8 +48,8 @@
 <script lang="ts">
 import { defineComponent, CSSProperties } from "vue"
 import _ from "lodash"
-import { FocusPunt } from "../objects/focus-punt"
-import FocusPuntComponent from "../components/focus-punt-component.vue"
+import { Waterpunt } from "../objects/waterpunt"
+import WaterpuntComponent from "../components/waterpunt-component.vue"
 
 interface Options {
     test: string
@@ -57,22 +57,22 @@ interface Options {
 
 export default defineComponent({ 
     components: {
-        FocusPuntComponent
+        WaterpuntComponent
     },
     data() {
         // Maak 3 focus punten in een cirkel
-        const focusPunten = [
-            new FocusPunt({pos:{ x: 0, y: 0, z: 0 }, watervoorraad: Math.floor(Math.random() * 50) + 75}),
-            new FocusPunt({pos:{ x: 0, y: 0, z: 0 }, watervoorraad: Math.floor(Math.random() * 25) + 50}),
-            new FocusPunt({pos:{ x: 0, y: 0, z: 0 }, watervoorraad: Math.floor(Math.random() * 50) + 50})
+        const waterpunten = [
+            new Waterpunt({pos:{ x: 0, y: 0, z: 0 }, watervoorraad: Math.floor(Math.random() * 50) + 75}),
+            new Waterpunt({pos:{ x: 0, y: 0, z: 0 }, watervoorraad: Math.floor(Math.random() * 25) + 50}),
+            new Waterpunt({pos:{ x: 0, y: 0, z: 0 }, watervoorraad: Math.floor(Math.random() * 50) + 50})
         ]
         return {
             options: {
                 test: "",
             } as Partial<Options>,
             ignoreOptionsUpdate: true,
-            focusPunten,
-            actiefFocusPuntIndex: 0,
+            waterpunten,
+            actiefWaterpuntIndex: 0,
         }
     },
     watch: {
@@ -127,7 +127,7 @@ export default defineComponent({
             })
         },
         getActiefPunt() {
-            return this.focusPunten[this.actiefFocusPuntIndex]
+            return this.waterpunten[this.actiefWaterpuntIndex]
         },
         getPuntStyle(index: number): CSSProperties {
             // Bereken positie in een cirkel

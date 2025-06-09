@@ -7,13 +7,13 @@ interface Position {
 }
 
 // Type definitie voor de constructor opties
-export interface FocusPuntOptions {
+export interface WaterpuntOptions {
     pos?: Position;
     watervoorraad?: number;
 }
 
-// Type definitie voor een FocusPunt object
-export interface IFocusPunt {
+// Type definitie voor een Waterpunt object
+export interface IWaterpunt {
     pos: Position;
     watervoorraad: number;
     inFocus: boolean;
@@ -23,7 +23,7 @@ export interface IFocusPunt {
     gebruikWater(hoeveelheid: number): boolean;
 }
 
-export class FocusPunt implements IFocusPunt {
+export class Waterpunt implements IWaterpunt {
     private _pos: Position;
     private _watervoorraad: number;
     private _inFocus: boolean;

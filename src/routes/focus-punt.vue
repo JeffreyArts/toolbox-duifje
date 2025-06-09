@@ -7,23 +7,23 @@
         <hr>
         <section class="viewport">
             <div class="viewport-content" ratio="1x1">
-                <FocusPuntComponent :focus-punt="focusPunt" />
+                <WaterpuntComponent :waterpunt="waterpunt" />
             </div>
         </section>
 
         <aside class="sidebar">
             <div class="options">
-                <div class="option-group" name="Focus punt status">
+                <div class="option-group" name="Waterpunt status">
                     <div class="option">
                         <label for="watervoorraad">Watervoorraad</label>
-                        <input type="number" id="watervoorraad" v-model="focusPunt.watervoorraad" disabled />
+                        <input type="number" id="watervoorraad" v-model="waterpunt.watervoorraad" disabled />
                     </div>
                     <div class="option">
-                        <p>In focus: {{ focusPunt.inFocus ? 'Ja' : 'Nee' }}</p>
+                        <p>In focus: {{ waterpunt.inFocus ? 'Ja' : 'Nee' }}</p>
                     </div>
                     <div class="option">
                         <label for="is-focussing">Focussing</label>
-                        <input type="number" id="is-focussing" v-model="focusPunt.isFocussing" disabled />
+                        <input type="number" id="is-focussing" v-model="waterpunt.isFocussing" disabled />
                     </div>
                 </div>
 
@@ -51,8 +51,8 @@
 <script lang="ts">
 import { defineComponent } from "vue"
 import _ from "lodash"
-import { FocusPunt } from "../objects/focus-punt"
-import FocusPuntComponent from "../components/focus-punt-component.vue"
+import { Waterpunt } from "../objects/waterpunt"
+import WaterpuntComponent from "../components/waterpunt-component.vue"
 
 interface Options {
     test: string
@@ -60,17 +60,17 @@ interface Options {
 
 export default defineComponent({ 
     components: {
-        FocusPuntComponent
+        WaterpuntComponent
     },
     props: [],
     data() {
-        const focusPunt = new FocusPunt({pos:{ x: 0, y: 0, z: 0 }, watervoorraad: Math.floor(Math.random() * 50) + 75})
+        const waterpunt = new Waterpunt({pos:{ x: 0, y: 0, z: 0 }, watervoorraad: Math.floor(Math.random() * 50) + 75})
         return {
             options: {
                 test: "",
             } as Partial<Options>,
             ignoreOptionsUpdate: true,
-            focusPunt,
+            waterpunt,
             waterAmount: 25,
             waterUsage: 25,
         }
@@ -133,10 +133,10 @@ export default defineComponent({
             }
         },
         vulWater() {
-            this.focusPunt.vulWater(this.waterAmount);
+            this.waterpunt.vulWater(this.waterAmount);
         },
         gebruikWater() {
-            const success = this.focusPunt.gebruikWater(this.waterUsage);
+            const success = this.waterpunt.gebruikWater(this.waterUsage);
         }
     }
 })
