@@ -24,8 +24,8 @@
                     <div class="option">
                         <label for="weerType">Weertype</label>
                         <select id="weerType" v-model="options.weerType">
-                            <option value="normaal">Normaal</option>
                             <option value="regen">Regen</option>
+                            <option value="normaal">Normaal</option>
                             <option value="zon">Zon</option>
                         </select>
                     </div>
