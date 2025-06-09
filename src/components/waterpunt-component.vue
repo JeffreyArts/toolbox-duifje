@@ -19,6 +19,11 @@ export default defineComponent({
         waterpunt: {
             type: Object as PropType<IWaterpunt>,
             required: true
+        },
+        static: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     },
     data() {
@@ -26,6 +31,21 @@ export default defineComponent({
             animationFrameId: null as number | null,
             mousePosition: { x: 200, y: 200 },
             focusContainer: null as HTMLDivElement | null,
+        }
+    },
+    watch: {
+        static: {
+            handler() {
+                if (this.static) {
+                    this.stopMouseTracking()
+                    window.removeEventListener('mousemove', this.updateMousePosition)
+                    this.waterpunt.isFocussing = 100
+                } else {
+                    this.startMouseTracking()
+                    window.addEventListener('mousemove', this.updateMousePosition)
+                }
+            },
+            immediate: true
         }
     },
     computed: {
@@ -53,23 +73,25 @@ export default defineComponent({
         },
         startMouseTracking() {
             const checkMouseInRadius = () => {
-                const radius = 200 // Radius in pixels
-                const distance = Math.sqrt(
-                    Math.pow(this.mousePosition.x, 2) + 
-                    Math.pow(this.mousePosition.y, 2)
-                )
-                
-                if (distance <= radius) {
-                    let multiplier = 1 
-                    if (distance <= radius/2) {
-                        multiplier = 5
-                    } else if (distance <= radius/4) {
-                        multiplier = 10
-                    }
+                if (!this.static) {
+                    const radius = 200 // Radius in pixels
+                    const distance = Math.sqrt(
+                        Math.pow(this.mousePosition.x, 2) + 
+                        Math.pow(this.mousePosition.y, 2)
+                    )
+                    
+                    if (distance <= radius) {
+                        let multiplier = 1 
+                        if (distance <= radius/2) {
+                            multiplier = 5
+                        } else if (distance <= radius/4) {
+                            multiplier = 10
+                        }
 
-                    this.waterpunt.isFocussing += multiplier * (1 - distance/100)
-                } else {
-                    this.waterpunt.stopFocussing()
+                        this.waterpunt.isFocussing += multiplier * (1 - distance/100)
+                    } else {
+                        this.waterpunt.stopFocussing()
+                    }
                 }
                 
                 this.animationFrameId = requestAnimationFrame(checkMouseInRadius)

@@ -3,6 +3,7 @@ import FocusPunt from "./focus-punt.vue"
 import FocusPunten from "./focus-punten.vue"
 import Home from "./home.vue"
 import OptionsOverview from "./options-overview.vue"
+import WeerSysteem from "./weer-systeem.vue"
 
 const routes = [
     {
@@ -19,6 +20,11 @@ const routes = [
         path: "/focus-punten",
         name: "Focus punten",
         component: FocusPunten
+    },
+    {
+        path: "/weer-systeem",
+        name: "Weersysteem",
+        component: WeerSysteem
     },
     {
         path: "/options-overview",
